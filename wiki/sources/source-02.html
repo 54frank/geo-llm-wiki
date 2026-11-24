@@ -1,0 +1,104 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>What Generative Search Engines Like and How to Optimize Web Content Cooperatively</title><style>html{color-scheme:light;background:#f5f8f7;color:#18322c;font:1.05rem/1.75 system-ui,sans-serif}body{margin:0}header{background:#153b32;color:white}header nav{max-width:66rem;margin:auto;display:flex;flex-wrap:wrap;gap:1rem;padding:.9rem 1.25rem}header a{color:#e0fff2}main{max-width:66rem;margin:0 auto;padding:2rem 1.25rem 4rem;overflow-wrap:anywhere}h1{font-size:clamp(1.85rem,4vw,3rem);line-height:1.25}h2{line-height:1.35}a{color:#075c47;text-underline-offset:.16em}li{margin:.45rem 0}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;background:white}td,th{padding:.5rem .7rem;border:1px solid #bdcdc8;text-align:left}th{background:#e4f0ec}a:focus-visible{outline:3px solid #ba6a00;outline-offset:3px}</style></head><body><header><nav><a href="../../index.html">GEO LLM Wiki</a><a href="../../wiki/index.html">Wiki</a><a href="../../slides/index.html">12 ? HTML ????</a></nav></header><main><h1>What Generative Search Engines Like and How to Optimize Web Content Cooperatively</h1>
+<p>以下頁碼按本地 PDF 自第一頁起算。附錄另起印刷頁碼，例如附錄第 1 頁是 PDF 第 14 頁。</p>
+<h2>1. 文獻基本資料</h2>
+<ul>
+<li>作者：Yujiang Wu、Shanshan Zhong、Yubin Kim、Chenyan Xiong。前兩位為同等貢獻作者。機構為 Carnegie Mellon University 及 Vody（PDF 第 1 頁）。</li>
+<li>版本：2025 年 10 月 13 日，arXiv:2510.11438v1，共 30 頁。原文自標為研究進行中的預印本（PDF 第 1 頁）。</li>
+<li>原始資料：<a href="https://arxiv.org/pdf/2510.11438v1">arXiv PDF v1</a> · <a href="https://arxiv.org/pdf/2510.11438">arXiv PDF</a></li>
+</ul>
+<h2>2. 研究背景與研究問題</h2>
+<p>作者探討能否從回答和候選文件推導引擎採用內容的偏好，進而以這些規則改寫文件、提高能見度並維持回答效用。研究也比較不同模型與查詢領域的規則重疊及轉用成效（PDF 第 1–4、8–10 頁，§1–3、§5.3–6）。</p>
+<h2>3. 重要概念與定義</h2>
+<ul>
+<li><strong>GEO 能見度</strong>：Word 衡量連到某來源的答案字數占比，Pos 衡量位置加權，Overall 整合兩者。挑選文件對時，研究用三項之和作為 Vis（PDF 第 3、25 頁，§3.1、式 1、附錄 I）。</li>
+<li><strong>GEU（Generative Engine Utility）</strong>：從相關性、引用品質和表達品質評估生成答案。KPR 與 KPC 分別衡量參考要點的保留與矛盾。Precision 衡量引用能否正確支撐所連結的事實主張，Recall 衡量事實主張獲引的涵蓋度，另評估清晰度與洞見（PDF 第 6–7、25 頁，§4、表 2、附錄 I）。</li>
+<li><strong>協作式改寫</strong>：在提高來源能見度的同時，保留原意並檢查生成答案效用。GEU 透過自動評估量化這個目標（PDF 第 2、5–8 頁，§1、§3.2.2、§4、§5.2）。</li>
+</ul>
+<h2>4. 研究方法、資料來源與實驗平台</h2>
+<ul>
+<li><strong>找規則</strong>：對同一查詢比較能見度差距最大的兩份文件及生成答案。Explainer 說明可觀察差異，Extractor 提取重點，Merger 分層合併，Filter 移除不易泛化的規則。規則是從行為推得的描述（PDF 第 3–4、18–20 頁，§3.1、演算法 1–2、附錄 B）。</li>
+<li><strong>用規則改寫</strong>：AutoGEO API 用 Gemini 2.5 Pro 加上規則提示。AutoGEO Mini 以 Qwen3-1.7B 為基礎，先用教師改寫做監督微調，再以群組相對策略最佳化（GRPO）整合能見度、規則遵循與語義一致性回饋。冷啟動從 Researchy-GEO 的 10,000 筆訓練例中篩出 4,976 筆教師樣本（PDF 第 4–6、21–23、27 頁，§3.2、§4、附錄 C–D、表 10）。</li>
+<li><strong>資料與引擎</strong>：GEO-Bench、Researchy-GEO、E-commerce 分別使用 8,000／1,000、10,000／1,000、1,667／416 筆訓練及測試查詢。E-commerce 取自 LMSYS-Chat-1M，經英文篩選、模型篩選與人工確認。每題有五份候選文件，GEO-Bench 測試集沿用原候選與目標，其他使用 ClueWeb API，從候選隨機選目標（PDF 第 6、23–24 頁，§4、附錄 F–G）。</li>
+<li><strong>實驗平台</strong>：研究自建檢索增強生成（RAG）引擎，分別使用 Gemini 2.5 Flash-Lite、GPT-4o-mini、Claude 3 Haiku。比較未改寫、既有 GEO 與對抗式對照，並使用 DeepResearchGym 評估 GEU（PDF 第 6–8、24–25、27 頁，§4–5、表 1–4／10、附錄 H–I）。</li>
+</ul>
+<h2>5. 主要發現及重要數據</h2>
+<ul>
+<li><strong>三個資料集的能見度</strong>：Gemini 引擎的 E-commerce Overall，未改寫為 18.32、流暢度最佳化為 22.99、AutoGEO API 為 34.05、Mini 為 25.25。GEO-Bench 的 API／Mini 為 34.92／27.12，Researchy-GEO 為 43.76／38.53。作者另報告 API 較最強基準最高提升 50.99%，Mini 平均提升 20.99%。以 Researchy-GEO 的 Overall 表值 43.76／27.75 直接換算，API 約增 57.69%。原文未明示兩項報告值的精確彙整口徑，待驗證，不得用於簡報中的確定性數值主張（PDF 第 6–7、23 頁，§5.1、表 1、附錄 E）。</li>
+<li><strong>低能見度文件</strong>：Researchy-GEO 的 Gemini 低能見度組，Overall 從未改寫的 9.46，升至流暢度最佳化的 16.78、API 的 35.83、Mini 的 30.24（PDF 第 7–8 頁，§5.1、表 3）。</li>
+<li><strong>回答效用</strong>：作者整體結論為提高能見度且大致維持回答效用。表 2 仍有單項下滑，例如 E-commerce 的 GPT 引擎使用 API 時，Precision 從 73.79 升至 90.59，Clarity 從 66.09 降至 54.45。Gemini 的 Researchy-GEO 對抗式對照中，AutoGEO 兩版本的 Overall 高於兩種對抗式對照，但 Mini 的 KPC（越低越好）由 0.27 升至 0.34（PDF 第 7–8、10、28 頁，§5.2、§6、表 2／4／11）。</li>
+<li><strong>規則依領域而變</strong>：Gemini 下，Researchy-GEO 與 GEO-Bench 的規則關鍵字 Jaccard 重疊率為 88.24%，涉及 E-commerce 的兩組比較為 34.78% 與 40.00%。電商規則特別強調可操作指引，跨引擎或領域轉用規則仍可能提升能見度（PDF 第 8–9、15–18 頁，§5.3、圖 2、表 5／7–9）。</li>
+<li><strong>消融與推論成本</strong>：在 Gemini 的 Researchy-GEO 測試，Mini 完整版 Overall 為 38.53，移除規則獎勵後為 31.41。作者估計 Mini 推論成本約為 API 的 0.0071 倍，依 GEO-Bench 測試集、指定 GPU 算力與當時 API 費率計算（PDF 第 10、23 頁，§5.4、表 6、附錄 E）。</li>
+</ul>
+<h2>6. 研究限制與適用條件</h2>
+<ul>
+<li><strong>外部效度</strong>：三個模型用於研究者自建的受控 RAG 引擎，文件改寫後在候選集中替換。結果能說明候選文件如何被使用。對商用搜尋產品的端到端索引、檢索與導流成效，以及其他語言、代理式和多模態引擎的適用性，均待驗證（PDF 第 3–6、10、24 頁，§3–4、§6、附錄 F–H）。</li>
+<li><strong>KPR／KPC 的資料集差異</strong>：正文 §4 指向 Researchy-GEO，表 2／11 也只在 Researchy-GEO 列值。附錄 I 卻稱只在 GEO-Bench 計算。表格的呈現與實際執行所用資料集是不同層面的證據，目前只能確認各處的記載。附錄可能有資料集名稱誤植，實際執行設定仍待驗證，不得把受此差異影響的 KPR／KPC 數值寫成簡報中的確定性主張。附錄 C.2 也未說明語義獎勵如何處理越低越好的 KPC，其符號／轉換方式待驗證（PDF 第 5–7、21、25、28 頁，§3.2.2、§4、附錄 C.2、I、表 2／11）。</li>
+<li><strong>Clarity 表值差異</strong>：GEO-Bench 的 Gemini AutoGEO Mini 在表 2 為 66.89，在表 11 為 59.94，相差 6.95 個百分點。相同設定的未改寫與 API 值在兩表皆為 59.76／60.78，Mini 的其他三項 GEU 數值也相符。可能是表列轉錄、評分或彙整版本差異，原文未提供核定依據。兩值待驗證，皆不得用於簡報中的確定性數值主張（PDF 第 7、28 頁，表 2／11）。</li>
+<li><strong>推論成本</strong>：附錄 E 比較特定價格和硬體的推論費用。完整建置、訓練和維護成本待驗證（PDF 第 21–23 頁，附錄 C、E）。</li>
+</ul>
+<h2>7. 與 GEO、品牌曝光及電商的關聯</h2>
+<p><strong>研究所支持的關聯。</strong> 電商查詢有獨立測試集，該情境抽出的規則包含實用步驟、具體規格、優缺點、清楚結構及可驗證資訊。E-commerce 的目標文件在三種引擎都有較高的 Overall，但回答效用須逐項評估（PDF 第 7–9、15–16 頁，§5.1–5.3、表 2／5／7）。</p>
+<p><strong>延伸推論。</strong> 電商品牌可把規格、適用條件、使用步驟和有依據的取捨寫到商品頁，並同時觀察引用份量和答案的規格正確性。對品牌提及、點擊率、成交的影響待驗證。這個應用以電商規則與雙重評估設計為依據（PDF 第 6–9、15–16 頁，§4–5、表 2／5／7）。</p>
+<h2>8. 初學者說明</h2>
+<p>想像 AI 用五份商品資料回答選購問題。AutoGEO 先比較哪一份用得最多、哪一份用得最少，整理可能有幫助的寫法，再改寫目標文件。最後既看文件有沒有獲得較多引用，也看答案是否清楚且有根據（PDF 第 3–8 頁，§3–5、圖 1、表 2）。這是對方法的簡化說明。</p>
+<h2>9. 來源追溯表</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>主張</th>
+<th align="right">PDF 頁碼</th>
+<th>章節／表格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>偏好規則、資料對比、Vis 為三項總和</td>
+<td align="right">3–4、18–20、25</td>
+<td>§3.1、式 1–2、演算法 1–2、附錄 B、I</td>
+</tr>
+<tr>
+<td>API 提示與 Mini 訓練、4,976 筆教師樣本</td>
+<td align="right">4–6、21–23、27</td>
+<td>§3.2、附錄 C–D、表 10</td>
+</tr>
+<tr>
+<td>三資料集筆數及候選來源例外</td>
+<td align="right">6、23–24</td>
+<td>§4、附錄 F–H</td>
+</tr>
+<tr>
+<td>電商 Overall 18.32／22.99／34.05／25.25</td>
+<td align="right">7</td>
+<td>§5.1、表 1</td>
+</tr>
+<tr>
+<td>跨模型能見度與 GEU 的個別升降</td>
+<td align="right">7–8、28</td>
+<td>§5.1–5.2、表 2–4／11</td>
+</tr>
+<tr>
+<td>只有 Researchy-GEO 有 KPR／KPC 表列值，附錄 I 說法相反</td>
+<td align="right">6–7、25、28</td>
+<td>§4、表 2／11、附錄 I</td>
+</tr>
+<tr>
+<td>領域規則的重疊、轉用及電商規則</td>
+<td align="right">8–9、15–18</td>
+<td>§5.3、圖 2、表 5／7–9</td>
+</tr>
+<tr>
+<td>規則獎勵消融、作者結論與推論費用</td>
+<td align="right">10、23</td>
+<td>§5.4、§6、表 6、附錄 E</td>
+</tr>
+<tr>
+<td>品牌／電商延伸推論的依據</td>
+<td align="right">6–9、15–16</td>
+<td>§4–5、表 2／5／7</td>
+</tr>
+</tbody></table></div>
+<h2>對應教學單元</h2>
+<ul>
+<li><a href="../topics/03-optimization.html">讓內容易於查證與採用</a></li>
+<li><a href="../topics/05-evaluation-limitations.html">成效評估與證據限制</a></li>
+</ul>
+</main></body></html>

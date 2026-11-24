@@ -1,0 +1,98 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>GEO: Generative Engine Optimization</title><style>html{color-scheme:light;background:#f5f8f7;color:#18322c;font:1.05rem/1.75 system-ui,sans-serif}body{margin:0}header{background:#153b32;color:white}header nav{max-width:66rem;margin:auto;display:flex;flex-wrap:wrap;gap:1rem;padding:.9rem 1.25rem}header a{color:#e0fff2}main{max-width:66rem;margin:0 auto;padding:2rem 1.25rem 4rem;overflow-wrap:anywhere}h1{font-size:clamp(1.85rem,4vw,3rem);line-height:1.25}h2{line-height:1.35}a{color:#075c47;text-underline-offset:.16em}li{margin:.45rem 0}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;background:white}td,th{padding:.5rem .7rem;border:1px solid #bdcdc8;text-align:left}th{background:#e4f0ec}a:focus-visible{outline:3px solid #ba6a00;outline-offset:3px}</style></head><body><header><nav><a href="../../index.html">GEO LLM Wiki</a><a href="../../wiki/index.html">Wiki</a><a href="../../slides/index.html">12 ? HTML ????</a></nav></header><main><h1>GEO: Generative Engine Optimization</h1>
+<p>以下頁碼按本地 PDF 自第一頁起算。</p>
+<h2>1. 文獻基本資料</h2>
+<ul>
+<li>作者：Pranjal Aggarwal、Vishvak Murahari、Tanmay Rajpurohit、Ashwin Kalyan、Karthik Narasimhan、Ameet Deshpande。前兩位為同等貢獻作者（PDF 第 1 頁）。</li>
+<li>發表：ACM KDD 2024。所讀版本為 arXiv:2311.09735v3，標示 2024 年 6 月 28 日，共 12 頁（PDF 第 1 頁）。</li>
+<li>原始資料：<a href="https://arxiv.org/pdf/2311.09735v3">arXiv PDF v3</a> · <a href="https://arxiv.org/pdf/2311.09735">arXiv PDF</a> · <a href="https://doi.org/10.1145/3637528.3671900">ACM DOI</a></li>
+</ul>
+<h2>2. 研究背景與研究問題</h2>
+<p>生成式搜尋會整理多份來源並將引用嵌入答案。作者探討如何衡量來源在這類答案中的能見度、哪些改寫能提高能見度，以及成效是否因查詢領域或引擎而異（PDF 第 1–3 頁，§1–2）。</p>
+<h2>3. 重要概念與定義</h2>
+<ul>
+<li><strong>Generative Engine（GE）</strong>：結合資料檢索與生成模型，根據查詢與取得的資料產生有來源歸屬的自然語言回答。圖 2 示意查詢改寫、檢索、摘要與合成流程（PDF 第 3 頁，§2.1、圖 2）。</li>
+<li><strong>Generative Engine Optimization（GEO）</strong>：在無須掌握引擎內部演算法的情況下，調整網頁文字、呈現方式或內容，提高來源在生成答案中的曝光（PDF 第 2–4 頁，§2.2、§2.2.2）。</li>
+<li><strong>曝光（impression）</strong>：Word Count 計算與來源引用相連的句子占答案字數的比例，共同引用時分攤字數。Position-Adjusted Word Count 給較靠前的句子較高權重。Subjective Impression 由模型評估引用的相關性、影響力、獨特性、位置、份量、點擊可能性及多樣性（PDF 第 3–6 頁，§2.2.1、§3.4，式 2–4）。</li>
+</ul>
+<h2>4. 研究方法、資料來源與實驗平台</h2>
+<ul>
+<li>GEO-bench 從九種來源整理 10,000 筆查詢，訓練、驗證、測試分別為 8,000、1,000、1,000 筆。來源包含搜尋紀錄、AllSouls、LIMA、Perplexity Discover、ELI5 及合成問題。資訊型查詢占 80%，交易型及導航型各占 10%（PDF 第 5、11 頁，§3.2、附錄 B.2）。</li>
+<li>主實驗對每個查詢抓取 Google 前五個結果的文字，由 GPT-3.5 Turbo 生成回答。每查詢以溫度 0.7 抽樣五個回答。各改寫方法使用同一個隨機選定的目標來源，比較未改寫版本。論文亦報告五個隨機種子的結果（PDF 第 5–6、12 頁，§3.1、§3.3–3.4、附錄 B.4、表 6）。</li>
+<li>測試九種方法，涵蓋增添統計、外部來源或引文，以及可讀性、流暢度、權威語氣、關鍵字堆疊、特殊用字和術語。Perplexity.ai 實驗取 200 筆測試樣本，以上傳文字檔限制可用來源（PDF 第 4–5、8–9、12 頁，§2.2.2、§6、附錄 C.1）。</li>
+</ul>
+<h2>5. 主要發現及重要數據</h2>
+<ul>
+<li><strong>主實驗</strong>：加入引文的 Position-Adjusted Word Count Overall 從基準 19.3 升至 27.2，Subjective Impression 平均由 19.3 升至 24.7。表 1 報告相對提升約 41%／28%。加入統計的兩項分數為 25.2／23.7。關鍵字堆疊的 Overall 為 17.7，低於基準（PDF 第 6–7 頁，§4、表 1）。</li>
+<li><strong>領域和組合差異</strong>：表 3 顯示策略效果隨主題而異，例如引用來源在事實性查詢表現突出。策略組合分析在 200 筆子樣本上進行，流暢度最佳化加上統計數據的相對提升為 35.8%（PDF 第 7–8 頁，§5.1、§5.3、表 3、圖 4、註 4）。</li>
+<li><strong>多來源同時最佳化</strong>：在表 2 的實驗裡，所有候選來源都套用 Cite Sources 時，原 Google 結果第 5 名的來源能見度相對增加 115.1%，第 1 名減少 30.3%。這是按原搜尋排名分組的生成答案能見度變化（PDF 第 7–8 頁，§5.2、表 2）。</li>
+<li><strong>Perplexity.ai</strong>：表 5／7 的兩項基準分數為 24.1／24.7，加入引文為 29.1／32.1，加入統計為 26.2／33.9。§6 與表 7 報告最佳相對提升 22%／37%。依表值以「（改寫分數－基準分數）÷ 基準分數」換算，加入引文的 Overall 約增 20.75%，加入統計的 Subjective Impression 約增 37.25%。第一項差距不能只用一位小數四捨五入解釋。§3.4 的逐來源相對變化若先逐例計算再彙整，可能與以平均分數直接換算不同。作者未確認 22% 採用何種彙整口徑，待驗證，不得用於簡報中的確定性數值主張（PDF 第 6、8–9、12 頁，§3.4、式 4、§6、表 5／7）。</li>
+<li><strong>作者結論</strong>：在所測環境中，加入可信引用、引文或統計資料可改善能見度。適合的策略依領域而變，組合策略也有潛力（PDF 第 9 頁，§8）。</li>
+</ul>
+<h2>6. 研究限制與適用條件</h2>
+<ul>
+<li>作者只實驗兩種引擎，主實驗聚焦單輪回答，附錄 A 僅延伸多輪流程。商用引擎採受控上傳，實驗未評估改寫對傳統搜尋排名的影響，且查詢分布、引擎和標籤可能隨時間改變或含誤差（PDF 第 3、9、11–12 頁，§2.1、§9、附錄 A、B.2、C.1）。</li>
+<li>曝光分數衡量答案內的來源相對份量，主觀面向由模型評分。表 4 的改寫是展示用，所示外部引文與統計的獨立真實性待驗證。真實點擊、品牌提及與銷售轉換的效應也待驗證（PDF 第 5–6、8–9 頁，§3.4、§5.4、§9、表 4）。</li>
+</ul>
+<h2>7. 與 GEO、品牌曝光及電商的關聯</h2>
+<p><strong>研究所支持的關聯。</strong> 只要候選來源已被檢索，改寫可能改變頁面在合成答案裡的呈現。資料包含交易型查詢，整體披露的成效仍屬跨領域測試（PDF 第 5–8 頁，§3.2–4、§5.2）。</p>
+<p><strong>延伸推論。</strong> 電商品牌可把可查證的規格、測試條件或比較資料整合到既有商品說明，並就一組購物問題觀察改寫前後的引用情況。品牌名是否真的出現在答案，以及曝光能否帶來點擊或成交，均待驗證。推論依據為內容改寫與引用指標的設計（PDF 第 3–6 頁，§2.2、§3.4）。</p>
+<h2>8. 初學者說明</h2>
+<p>讀到 AI 的一段回答，可以看它在哪一句標出來源、那句排得多前，以及多少內容歸到同一來源。GEO 的其中一個目標，就是讓網頁提供可直接支撐這些句子的資訊（PDF 第 3–4 頁，§2.2.1、圖 3）。</p>
+<h2>9. 來源追溯表</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>主張</th>
+<th align="right">PDF 頁碼</th>
+<th>章節／表格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GE、GEO 與曝光定義</td>
+<td align="right">2–6</td>
+<td>§2.1–2.2、§3.4，圖 2–3、式 2–4</td>
+</tr>
+<tr>
+<td>九種改寫、10,000 筆查詢與生成設定</td>
+<td align="right">4–6、11–12</td>
+<td>§2.2.2、§3、附錄 B、表 6</td>
+</tr>
+<tr>
+<td>引文 27.2／24.7，基準 19.3／19.3</td>
+<td align="right">6</td>
+<td>§4、表 1</td>
+</tr>
+<tr>
+<td>第 5 名 +115.1%，第 1 名 −30.3%</td>
+<td align="right">7–8</td>
+<td>§5.2、表 2</td>
+</tr>
+<tr>
+<td>領域差異與流暢度加統計為 35.8%</td>
+<td align="right">7–8</td>
+<td>§5.1、§5.3、表 3、圖 4、註 4</td>
+</tr>
+<tr>
+<td>Perplexity.ai 以檔案提供來源，測試 200 筆</td>
+<td align="right">8–9、12</td>
+<td>§6、附錄 C.1、表 5／7</td>
+</tr>
+<tr>
+<td>作者結論、引擎演進、標籤與排名限制</td>
+<td align="right">9、11</td>
+<td>§8–9、附錄 A、B.2</td>
+</tr>
+<tr>
+<td>電商應用屬推論，依據為改寫和曝光定義</td>
+<td align="right">3–6</td>
+<td>§2.2、§3.4</td>
+</tr>
+</tbody></table></div>
+<h2>對應教學單元</h2>
+<ul>
+<li><a href="../topics/01-generative-search.html">生成式搜尋如何組織答案</a></li>
+<li><a href="../topics/02-geo-basics.html">GEO 與 SEO 的分工</a></li>
+<li><a href="../topics/03-optimization.html">讓內容易於查證與採用</a></li>
+<li><a href="../topics/05-evaluation-limitations.html">成效評估與證據限制</a></li>
+</ul>
+</main></body></html>

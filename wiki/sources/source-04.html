@@ -1,0 +1,44 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>AI features and your website</title><style>html{color-scheme:light;background:#f5f8f7;color:#18322c;font:1.05rem/1.75 system-ui,sans-serif}body{margin:0}header{background:#153b32;color:white}header nav{max-width:66rem;margin:auto;display:flex;flex-wrap:wrap;gap:1rem;padding:.9rem 1.25rem}header a{color:#e0fff2}main{max-width:66rem;margin:0 auto;padding:2rem 1.25rem 4rem;overflow-wrap:anywhere}h1{font-size:clamp(1.85rem,4vw,3rem);line-height:1.25}h2{line-height:1.35}a{color:#075c47;text-underline-offset:.16em}li{margin:.45rem 0}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;background:white}td,th{padding:.5rem .7rem;border:1px solid #bdcdc8;text-align:left}th{background:#e4f0ec}a:focus-visible{outline:3px solid #ba6a00;outline-offset:3px}</style></head><body><header><nav><a href="../../index.html">GEO LLM Wiki</a><a href="../../wiki/index.html">Wiki</a><a href="../../slides/index.html">12 ? HTML ????</a></nav></header><main><h1>AI features and your website</h1>
+<p>Google Search Central 官方技術指南，頁面標示最後更新為 2025 年 12 月 10 日 UTC。這是平台營運方的產品文件。 <a href="https://developers.google.com/search/docs/appearance/ai-features">Google Search Central</a> · <a href="https://developers.google.com/search/docs/appearance/ai-features">官方文件</a></p>
+<h2>背景、方法與資料</h2>
+<p>文件說明網站擁有者如何理解 Google Search 的 AI Overviews 與 AI Mode，涵蓋連結顯示、技術資格、成效報告與預覽控制。文件描述產品運作與建議，未交代對照實驗、研究樣本或可供重算的數據（導言與各節）。</p>
+<h2>重要內容</h2>
+<ul>
+<li><strong>搜尋如何運作。</strong> AI Overviews 提供概要與延伸連結，AI Mode 用於深入探索、推理與比較。兩者都可能採用 query fan-out，針對子題及不同資料來源發出多組相關查詢。兩功能可能使用不同模型，因此回答與連結可不同（How AI features work in Search）。</li>
+<li><strong>顯示資格。</strong> 要成為支援連結，頁面須已編入索引，且有資格帶摘要片段出現在 Google Search。基本 SEO 仍適用，無額外技術資格或專用結構化資料要求。網站可以檢查爬取、內部連結、文字可讀性與 Merchant Center 資訊（How to appear in AI features）。</li>
+<li><strong>衡量與控制。</strong> 此版本文件說明相關流量納入 Search Console 成效報表的 Web 搜尋類型，也可用其他分析工具觀察轉換。網站可用適用 Googlebot 的規則管理爬取，並用 nosnippet、data-nosnippet、max-snippet 或 noindex 控制搜尋呈現（Measuring the performance of your site、Controlling your content in AI features in Search）。</li>
+</ul>
+<h2>限制及電商推論</h2>
+<p>取得顯示資格後仍無法保證被爬取、索引或顯示。文件提及 AI Overviews 點擊後的站內互動觀察，但沒有提供樣本數或效應大小。品牌可用 Search Console 與站內事件一起觀察變化，能否歸因到單一 AI 功能、能帶來多少轉換，均待驗證，不得用於簡報中的確定性數值主張（Technical requirements for appearing in AI features、Measuring the performance of your site）。</p>
+<h2>來源追溯表</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>主張</th>
+<th>官方文件章節</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>功能定位與多查詢展開</td>
+<td>How AI features work in Search</td>
+</tr>
+<tr>
+<td>頁面索引與摘要資格，沒有額外專用標記</td>
+<td>Technical requirements for appearing in AI features、SEO best practices</td>
+</tr>
+<tr>
+<td>Web 搜尋報表與站內轉換追蹤</td>
+<td>Measuring the performance of your site</td>
+</tr>
+<tr>
+<td>Googlebot 與搜尋預覽控制</td>
+<td>Controlling your content in AI features in Search、Troubleshooting preview controls</td>
+</tr>
+</tbody></table></div>
+<h2>對應教學單元</h2>
+<ul>
+<li><a href="../topics/01-generative-search.html">生成式搜尋如何組織答案</a></li>
+<li><a href="../topics/02-geo-basics.html">GEO 與 SEO 的分工</a></li>
+<li><a href="../topics/05-evaluation-limitations.html">成效評估與證據限制</a></li>
+</ul>
+</main></body></html>

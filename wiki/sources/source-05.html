@@ -1,0 +1,55 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Optimizing Visibility in Generative Engines: A Critical Survey of Generative Engine Optimization (2023-2026)</title><style>html{color-scheme:light;background:#f5f8f7;color:#18322c;font:1.05rem/1.75 system-ui,sans-serif}body{margin:0}header{background:#153b32;color:white}header nav{max-width:66rem;margin:auto;display:flex;flex-wrap:wrap;gap:1rem;padding:.9rem 1.25rem}header a{color:#e0fff2}main{max-width:66rem;margin:0 auto;padding:2rem 1.25rem 4rem;overflow-wrap:anywhere}h1{font-size:clamp(1.85rem,4vw,3rem);line-height:1.25}h2{line-height:1.35}a{color:#075c47;text-underline-offset:.16em}li{margin:.45rem 0}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;background:white}td,th{padding:.5rem .7rem;border:1px solid #bdcdc8;text-align:left}th{background:#e4f0ec}a:focus-visible{outline:3px solid #ba6a00;outline-offset:3px}</style></head><body><header><nav><a href="../../index.html">GEO LLM Wiki</a><a href="../../wiki/index.html">Wiki</a><a href="../../slides/index.html">12 ? HTML ????</a></nav></header><main><h1>Optimizing Visibility in Generative Engines: A Critical Survey of Generative Engine Optimization (2023-2026)</h1>
+<p>Olivier Martinez，2026 年 7 月 15 日，arXiv:2607.14035v1，預印本。封面以主標、副標及 2023–2026 年度標示呈現。下列頁碼為 PDF 實體頁序。<a href="https://arxiv.org/pdf/2607.14035v1">arXiv PDF v1</a> · <a href="https://arxiv.org/abs/2607.14035">arXiv 書目</a></p>
+<h2>研究背景與方法</h2>
+<p>作者做批判性範疇綜述，檢視 45 項研究。主要時間窗為 2023 年 11 月 16 日至 2026 年 7 月 14 日，包含一篇較早公開、於期間發表的研究。依出版狀態、流程階段、研究環境、測量單位、結果及效度威脅整理（PDF 第 1–3、11、14–15 頁，摘要、§2、§14、表 8）。</p>
+<h2>主要發現</h2>
+<ul>
+<li>能見度應分開衡量檢索機率、在模型參考資料中的位置、引用、顯著性、來源資訊實際被採用的程度、忠實性與使用者行為。頁面被引用時，仍需檢查它是否真正支撐回答中的主張（PDF 第 3–6 頁，§3、§6、圖 1、表 3）。</li>
+<li>在納入的研究中，查詢與文件的相關性、來源在參考資料中的位置有較多證據。已進入候選或模型上下文的來源可以改變答案，但綜述未找到可證明跨平台、長期改善自然檢索或下游行為的策略（PDF 第 6–8、11–12 頁，§7–8、§15、表 4–5）。</li>
+<li>商用引擎稽核顯示各平台的來源組合不同，重複查詢也會波動。作者建議固定測試條件、使用改寫問句與重複測量、保留未啟動搜尋或無引用的結果、做人工抽查，並用對照檢驗點擊等下游指標（PDF 第 5–6、7–10、13 頁，§6、§8、§11、表 6）。</li>
+<li>作者主張推薦系統應揭露商業關係，並關注來源是否過度集中及引用品質。這是治理建議，個別平台或品牌是否存在偏袒仍需另行測試（PDF 第 10 頁，§12）。</li>
+</ul>
+<h2>限制及電商推論</h2>
+<p>綜述所納入研究的設計及指標各異，作者未合併成單一平均效應。原始檢索未保留各資料庫命中數及完整排除清單。證據強度須按主張與研究設計判斷。引用能否帶來點擊、成交或長期跨平台成長待驗證，不得作為簡報中的確定性數值主張（PDF 第 3、11–14 頁，§2.4、§14–15、表 5–7）。</p>
+<p><strong>應用推論。</strong> 電商品牌可分別記錄推薦是否出現、引用是否支持規格、官網是否獲得點擊；要歸因到改寫，應加入對照。依據是作者的分階段指標及測量建議（PDF 第 3、9–10、13 頁，§3.2、§11、表 6）。</p>
+<h2>來源追溯表</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>主張</th>
+<th align="right">PDF 頁碼</th>
+<th>章節或表格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>範疇綜述、45 項、時間窗及分類</td>
+<td align="right">1–3、11、14–15</td>
+<td>摘要、§2、§14、表 8</td>
+</tr>
+<tr>
+<td>能見度各階段與來源忠實性</td>
+<td align="right">3–6</td>
+<td>§3、§6、圖 1、表 3</td>
+</tr>
+<tr>
+<td>已取得來源的效應與外推限制</td>
+<td align="right">6–8、11–12</td>
+<td>§7–8、§15、表 4–5</td>
+</tr>
+<tr>
+<td>重複測量、空結果、人工核對與對照</td>
+<td align="right">5–6、9–10、13</td>
+<td>§6、§11、表 6</td>
+</tr>
+<tr>
+<td>推薦集中、商業揭露及錯誤歸因風險</td>
+<td align="right">10</td>
+<td>§12</td>
+</tr>
+</tbody></table></div>
+<h2>對應教學單元</h2>
+<ul>
+<li><a href="../topics/04-brand-ecommerce.html">電商品牌應用與推薦偏誤</a></li>
+<li><a href="../topics/05-evaluation-limitations.html">成效評估與證據限制</a></li>
+</ul>
+</main></body></html>

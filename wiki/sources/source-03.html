@@ -1,0 +1,61 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>E-GEO: A Testbed for Generative Engine Optimization in E-Commerce</title><style>html{color-scheme:light;background:#f5f8f7;color:#18322c;font:1.05rem/1.75 system-ui,sans-serif}body{margin:0}header{background:#153b32;color:white}header nav{max-width:66rem;margin:auto;display:flex;flex-wrap:wrap;gap:1rem;padding:.9rem 1.25rem}header a{color:#e0fff2}main{max-width:66rem;margin:0 auto;padding:2rem 1.25rem 4rem;overflow-wrap:anywhere}h1{font-size:clamp(1.85rem,4vw,3rem);line-height:1.25}h2{line-height:1.35}a{color:#075c47;text-underline-offset:.16em}li{margin:.45rem 0}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;background:white}td,th{padding:.5rem .7rem;border:1px solid #bdcdc8;text-align:left}th{background:#e4f0ec}a:focus-visible{outline:3px solid #ba6a00;outline-offset:3px}</style></head><body><header><nav><a href="../../index.html">GEO LLM Wiki</a><a href="../../wiki/index.html">Wiki</a><a href="../../slides/index.html">12 ? HTML ????</a></nav></header><main><h1>E-GEO: A Testbed for Generative Engine Optimization in E-Commerce</h1>
+<p>Puneet S. Bagga、Vivek F. Farias、Tamar Korkotashvili（MIT）、Tianyi Peng、Yuhang Wu（Columbia University）。使用 2026 年 11 月 6 日的 arXiv v3，首頁標示 NeurIPS 2026 Evaluations and Datasets track。頁碼從 PDF 首頁起算。 <a href="https://arxiv.org/pdf/2511.20867v3">arXiv PDF v3</a> · <a href="https://arxiv.org/abs/2511.20867v3">arXiv 版本頁</a></p>
+<h2>研究背景與方法</h2>
+<p>研究問的是改寫商品說明後，同一商品是否會在購物助理的推薦清單中往前。先固定每題檢索出的十項候選商品，再只更換一項商品的文字，由同一模型重新排序。以「改寫前名次減改寫後名次」量化變化，正值表示前進，並對 2,000 筆固定測試配對取平均。研究比較五種排序模型、七種改寫模型與十五種人工提示策略。各組比較的模型配置依各實驗而定（PDF 第 2–7 頁，§2、§4.1–4.4、圖 1、表 2–4）。</p>
+<h2>資料</h2>
+<p>E-GEO 有 13,746 筆長篇英文購物查詢，源自 r/BuyItForLife 的貼文與留言。研究篩選具有明確購買意圖的內容，以模型改寫成購物對話並去除近似重複。商品來自 Amazon Reviews 2023，以向量檢索與相關性重排建立每題十項候選。第二次人工稽核以 150 組樣本、三位評分者檢查，每組平均 8.91 項相關商品，查詢自然度平均 4.12／5（PDF 第 3–5、15、19 頁，§3、附錄 B.1、B.3、表 6–8）。</p>
+<h2>主要發現</h2>
+<ul>
+<li>同一句簡單提示在不同改寫模型上成效不一。GPT-5、Claude 作為改寫模型時，跨五個排序模型平均分別前進 0.56、0.57 名，GPT-4o-mini 平均後退 0.36 名。這些是名次變化，單位為名次（PDF 第 5–6 頁，§4.2、表 2）。</li>
+<li>在固定 GPT-4.1 改寫模型下，研究依各排序模型的表現反覆調整提示，再按驗證集成績選擇版本。測試集上，十五種提示與五個排序模型的 75 個組合中，63 個比原提示改善，55 個改善至少 0.10 名。改善是與同列原策略比較，部分調整後的絕對成績仍為負值（PDF 第 6–8 頁，§4.4、表 4、圖 2）。</li>
+<li>作者歸納出的共同做法包括保留事實、突出可核查的商品特點、讓規格便於比較，以及貼近買家的用語。受控防護測試的結論限於該實驗環境（PDF 第 7–10 頁，§4.4–6、圖 2–3）。</li>
+</ul>
+<h2>限制與應用推論</h2>
+<p>研究固定候選集，衡量的是重排階段。作者指出，英文資料、論壇族群與 Amazon 商品格式會限制外推，真實索引、個人化、廣告、庫存、價格變動及多賣家同時最佳化皆不在範圍內。排序提高對用戶滿意度、成交與公平性的影響待驗證，不得用於簡報中的確定性數值主張（PDF 第 10 頁，§6.1–6.2）。</p>
+<p><strong>應用推論。</strong> 電商品牌可把經核實的規格、使用條件與差異放在方便比較的位置，再測量相同候選條件下的推薦表現。此做法源於受控重排實驗（PDF 第 3、7–10 頁）。</p>
+<h2>來源追溯表</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>主張</th>
+<th align="right">PDF 頁碼</th>
+<th>章節／表格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>作者、版本</td>
+<td align="right">1</td>
+<td>首頁</td>
+</tr>
+<tr>
+<td>重排與名次差定義</td>
+<td align="right">2–5</td>
+<td>§2、§4.1、圖 1</td>
+</tr>
+<tr>
+<td>查詢數、商品來源與人工稽核</td>
+<td align="right">3–5、15、19</td>
+<td>§3、附錄 B、表 6–8</td>
+</tr>
+<tr>
+<td>不同改寫模型的平均變化</td>
+<td align="right">5–6</td>
+<td>§4.2、表 2</td>
+</tr>
+<tr>
+<td>63／75 組改善及文字做法</td>
+<td align="right">6–10</td>
+<td>§4.4、表 4、圖 2、§6</td>
+</tr>
+<tr>
+<td>適用條件與外部效度</td>
+<td align="right">10</td>
+<td>§6.1–6.2</td>
+</tr>
+</tbody></table></div>
+<h2>對應教學單元</h2>
+<ul>
+<li><a href="../topics/04-brand-ecommerce.html">電商品牌應用與推薦偏誤</a></li>
+<li><a href="../topics/05-evaluation-limitations.html">成效評估與證據限制</a></li>
+</ul>
+</main></body></html>
